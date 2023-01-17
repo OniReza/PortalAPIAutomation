@@ -1,7 +1,8 @@
 Feature: Api Test for portals
 
 
-   Scenario: Test Api
+   Background:
      Given a valid Authorization key
-     And user login into v2
-     
+
+     Scenario: Login V2
+     When user login into v2
