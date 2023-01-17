@@ -34,13 +34,10 @@ public class TestStep {
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
 
-//        response = request.body("{ \"userName\":\"" + USERNAME + "\", \"password\":\"" + PASSWORD + "\"}")
-//                .get("/v2/auth/csrf");
-
         response=request.get("/v2/auth/csrf");
 
-        jsonString = response.asString();
-        token = JsonPath.from(jsonString).get("token");
+          jsonString = response.asString();
+         token = JsonPath.from(jsonString).get("token");
 
         System.out.println(jsonString);
 
@@ -56,8 +53,9 @@ public class TestStep {
         response = request.body("{ \"email\":\"" + USEREMAIL + "\", \"password\":\"" + PASSWORD + "\"}")
                 .post("/v2/auth/login");
 
-        String jsonString = response.asString();
+         String jsonString = response.asString();
         token = JsonPath.from(jsonString).get("token");
+        System.out.println(jsonString);
     }
 
     }
