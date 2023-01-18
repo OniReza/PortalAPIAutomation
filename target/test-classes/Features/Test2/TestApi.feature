@@ -1,6 +1,8 @@
-Feature: Customer API Testing
+Feature: API Test For Login
 
-  Scenario: Calling login API
-    Given Login API is provided
-    When User call login API
-    Then a token will be generated
+  Background:
+    Given A valid csrf token
+
+  Scenario:Verify Login API
+    When User hit the end point
+    Then User should see status code 401

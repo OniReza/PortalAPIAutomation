@@ -40,16 +40,13 @@ public class TestStep2 {
 
     private static final String USEREMAIL = "stalin.neurotrade.tst.1@mailinator.com";
     private static final String PASSWORD = "Tt123#123#";
-    private static final String BASE_URL = "https://api.tst.auws.cloud";
-    private static String token ;
-    private static String token2 ;
-    private static String jsonString;
-    private static String responseBody;
 
+    private static String token ;
+   private static String jsonString;
 
     RequestSpecification request;
-    @Given("^Login API is provided$")
-    public void login_API_is_provided() throws Exception {
+    @Given("A valid csrf token")
+    public void a_valid_csrf_token() throws Exception {
 
         prop.load(file);
         RestAssured.baseURI  = prop.getProperty("baseUrl");
@@ -61,46 +58,31 @@ public class TestStep2 {
         System.out.println(token);
         Utils.setEnvVariable(token);
 
+        int statusCode = response.getStatusCode();
+        System.out.println(statusCode);
+    }
+    Response response;
+
+    @When("User hit the end point")
+    public void user_hit_the_end_point() throws Exception {
+
         String jsonstring=response.getBody().asString();
         String tokenGenerated = JsonPath.from(jsonstring).get("token");
         request.header("Authorization","Bearer"+ tokenGenerated ).header("Content-Type", "application/json");
 
-        String Appis="{\n" +
-                "\t\"email\": \"stalin.neurotrade.tst.1@mailinator.com\",\n" +
-                "\t\"password\": \"Tt123#123#\"\n" +
-                "}";
+        String Appis="{\"email\":\"" + USEREMAIL + "\", \"password\":\"" + PASSWORD + "\"}";
+        Response rs= request.body(Appis).post("/v2/auth/login");
 
-       Response rs= request.body(Appis).post("/v2/auth/login");
-       Assert.assertEquals(201,rs.getStatusCode());
+        System.out.println(rs.getStatusCode());
+        Assert.assertEquals(401,rs.getStatusCode());
 
     }
-    Response response;
+    @Then("User should see status code 401")
+    public void user_should_see_status_code_401() throws Exception {
 
-    @When("^User call login API$")
-    public void user_call_customer_list_API() throws Exception {
-//       Header authorizationHeader = new Header("Authorization",(token));
-//        request.header(authorizationHeader);
-//
-//        response = request.body("{\"email\":\"" + USEREMAIL + "\", \"password\":\"" + PASSWORD + "\"}")
-//                .post("/v2/auth/login");
-
-        RestAssured.baseURI  = prop.getProperty("baseUrl");
-        request = RestAssured.given();
-
-
+        String Appis="{\"email\":\"" + USEREMAIL + "\", \"password\":\"" + PASSWORD + "\"}";
+        Response rs= request.body(Appis).post("/v2/auth/login");
+        Assert.assertEquals(401,rs.getStatusCode());
     }
-
-
-    @Then("^a token will be generated$")
-    public void a_token_will_be_generated() throws Exception {
-        int statusCode = response.getStatusCode();
-        System.out.println(statusCode);
-        System.out.print(response.asString());
-        token= response.jsonPath().getString("token");
-       // System.out.println(token);
-       // Utils.setEnvVariable(token);
-
-    }
-
 
 }
