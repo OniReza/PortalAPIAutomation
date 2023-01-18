@@ -3,20 +3,12 @@ package StepDefinations;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-
-
 import org.junit.Assert;
-
-import static io.restassured.RestAssured.given;
-import static org.apache.http.client.methods.RequestBuilder.post;
 import java.util.Properties;
 
 
