@@ -8,13 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-
-import io.restassured.RestAssured;
-import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -24,10 +18,9 @@ import org.junit.Assert;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.client.methods.RequestBuilder.post;
 import java.util.Properties;
-import org.json.JSONObject;
 
 
-public class TestStep2 {
+public class CsrfTokenStep {
     Properties prop=new Properties();
     FileInputStream file;
     {
