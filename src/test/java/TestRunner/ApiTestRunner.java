@@ -6,7 +6,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/Features/Test/Test.feature",glue = {"StepDefinations"},
+@CucumberOptions(features = "src/test/resources/Features/Test2/TestApi.feature",glue = {"StepDefinations"},
         monochrome = true
         )
 public class ApiTestRunner {

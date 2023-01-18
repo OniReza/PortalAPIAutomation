@@ -1,6 +1,8 @@
 package StepDefinations;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,14 +20,23 @@ import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 import static org.apache.http.client.methods.RequestBuilder.post;
+import java.util.Properties;
 
 public class TestStep {
 
+    Properties prop=new Properties();
+    FileInputStream file;
+    {
+        try {
+            file = new FileInputStream("./src/test/resources/config.properties");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     //private static final String USER_ID = "9b5f49ab-eea9-45f4-9d66-bcf56a531b85";
     private static final String USEREMAIL = "stalin.neurotrade.tst.1@mailinator.com";
     private static final String PASSWORD = "Tt123#123#";
-    private static final String BASE_URL = "https://api.dev.auws.cloud";
-
+    private static final String BASE_URL = "https://api.tst.auws.cloud";
     private static String token ;
     private static Response response;
     private static String jsonString;
@@ -38,22 +49,11 @@ public class TestStep {
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = given();
 
-//        response = RestAssured.given()
-//                .header("Content-Type", "application/json")
-//                .header("Authorization", "Bearer "+TokenGeneration.accessToken)
-//                .when()
-//                .get("/api/protsvc/ser");
-
-
-
-
         request.header("Content-Type", "application/json");
 
         response=request.get("/v2/auth/csrf");
        jsonString = response.asString();
         token = JsonPath.from(jsonString).get().toString();
-
-
         System.out.println(token);
 
 
@@ -66,16 +66,14 @@ public class TestStep {
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = given();
 
-        request.header("Authorization",token);
 
-        //request.header("Content-Type", "application/json");
-
+        request.header("Content-Type", "application/json");
 
 
         response = request.body("{\"email\":\"" + USEREMAIL + "\", \"password\":\"" + PASSWORD + "\"}")
                 .post("/v2/auth/login");
 
-//         String jsonString = response.asString();
+         String jsonString = response.asString();
          token = JsonPath.from(jsonString).get().toString();
         System.out.println(token);
 
