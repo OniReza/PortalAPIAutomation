@@ -40,7 +40,6 @@ public class CsrfTokenStep {
 
         jsonString = response.asString();
         token = JsonPath.from(jsonString).get().toString();
-        System.out.println(token);
         Utils.setEnvVariable(token);
 
         int statusCode = response.getStatusCode();
@@ -50,6 +49,11 @@ public class CsrfTokenStep {
 
     @When("User hit the end point")
     public void user_hit_the_end_point() throws Exception {
+
+        jsonString = response.asString();
+        token = JsonPath.from(jsonString).get().toString();
+        System.out.println(token);
+        Utils.setEnvVariable(token);
 
         String jsonstring=response.getBody().asString();
         String tokenGenerated = JsonPath.from(jsonstring).get("token");
@@ -62,8 +66,11 @@ public class CsrfTokenStep {
         Assert.assertEquals(401,rs.getStatusCode());
 
     }
-    @Then("User should see status code 401")
-    public void user_should_see_status_code_401() throws Exception {
+    @Then("User should see CRF token is generated")
+    public void User_should_see_CRF_token_generated() throws Exception {
+
+        int statusCode = response.getStatusCode();
+        System.out.println(statusCode);
 
         String Appis="{\"email\":\"" + USEREMAIL + "\", \"password\":\"" + PASSWORD + "\"}";
         Response rs= request.body(Appis).post("/v2/auth/login");
