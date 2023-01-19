@@ -4,13 +4,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
+
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class LoginStep {
@@ -27,9 +25,7 @@ public class LoginStep {
 
     private static final String USEREMAIL = "stalin.neurotrade.tst.1@mailinator.com";
     private static final String PASSWORD = "Tt123#123#";
-
     RequestSpecification request;
-
     @Then("User should see status code 401")
     public void user_should_see_status_code_401() throws Exception {
 
@@ -43,10 +39,7 @@ public class LoginStep {
         Response rs= request.body(Appis).post("/v2/auth/login");
         Assert.assertEquals(401,rs.getStatusCode());
 
-//        prop.load(file); Data retreave form config
-//        System.out.println(prop.getProperty("baseUrl"));
-//        System.out.println(prop.getProperty("token"));
-
+        System.out.println(rs.getStatusCode());
 
     }
 }
