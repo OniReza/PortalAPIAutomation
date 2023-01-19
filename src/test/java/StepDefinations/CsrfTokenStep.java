@@ -23,10 +23,8 @@ public class CsrfTokenStep {
         }
     }
 
-    private static final String USEREMAIL = "stalin.neurotrade.tst.1@mailinator.com";
-    private static final String PASSWORD = "Tt123#123#";
 
-    private static String token ;
+   private static String token ;
    private static String jsonString;
 
     RequestSpecification request;
@@ -34,9 +32,11 @@ public class CsrfTokenStep {
     public void a_valid_csrf_token() throws Exception {
 
         prop.load(file);
+
         RestAssured.baseURI  = prop.getProperty("baseUrl");
+        String ENDPOINT=prop.getProperty("CRFTokenEndPoint");
         request = RestAssured.given();
-        response=request.get("/v2/auth/csrf");
+        response=request.get(ENDPOINT);
 
         jsonString = response.asString();
         token = JsonPath.from(jsonString).get().toString();

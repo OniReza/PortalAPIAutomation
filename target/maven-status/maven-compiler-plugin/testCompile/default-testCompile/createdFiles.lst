@@ -1,0 +1,6 @@
+StepDefinations\LoginStep.class
+StepDefinations\TestStep.class
+TestRunner\ApiTestRunner.class
+TestRunner\LoginTestRunner.class
+StepDefinations\CsrfTokenStep.class
+StepDefinations\Utils.class
