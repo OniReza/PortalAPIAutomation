@@ -5,14 +5,27 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
+import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.http.Header;
 import org.junit.Assert;
 import java.util.Properties;
+import org.apache.http.client.methods.CloseableHttpResponse;
+
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
+import static io.restassured.RestAssured.given;
 
 
 public class CsrfTokenStep {
+
+    private CloseableHttpClient client;
+
+    private String origin;
     Properties prop=new Properties();
     FileInputStream file;
     {
@@ -31,11 +44,15 @@ public class CsrfTokenStep {
     @Given("A valid csrf token")
     public void a_valid_csrf_token() throws Exception {
 
+        RequestSpecification request = given().headers("Path","https://api.tst.auws.cloud/");
+       // Response response = request.when().get("https://example.com");
+
         prop.load(file);
 
         RestAssured.baseURI  = prop.getProperty("baseUrl");
+
         String ENDPOINT=prop.getProperty("CRFTokenEndPoint");
-        request = RestAssured.given();
+        request  = given();
         response=request.get(ENDPOINT);
 
         jsonString = response.asString();
@@ -51,8 +68,16 @@ public class CsrfTokenStep {
         jsonString = response.asString();
         token = JsonPath.from(jsonString).get().toString();
         System.out.println(token);
-        Utils.setEnvVariable(token);
+
+
     }
+
+    @Then("The response code should {int}")
+    public void theResponseCodeIs(int statusCode) {
+        int status = response.getStatusCode();
+        Assert.assertEquals(statusCode,status);
+    }
+
     @Then("User should see CRF token is generated")
     public void User_should_see_CRF_token_generated() throws Exception {
 

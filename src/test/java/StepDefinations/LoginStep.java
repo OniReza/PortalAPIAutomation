@@ -36,6 +36,7 @@ public class LoginStep {
         request.header("Authorization","Bearer"+ tokenGenerated ).header("Content-Type", "application/json");
 
         String Appis="{\"email\":\"" + USEREMAIL + "\", \"password\":\"" + PASSWORD + "\"}";
+
         Response rs= request.body(Appis).post(ENDPOINT);
         Assert.assertEquals(401,rs.getStatusCode());
 
@@ -43,4 +44,6 @@ public class LoginStep {
         System.out.println(rs.getStatusCode());
 
     }
+
+
 }

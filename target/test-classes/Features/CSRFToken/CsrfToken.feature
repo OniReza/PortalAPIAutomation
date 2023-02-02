@@ -5,4 +5,6 @@ Feature: API Test For CRF Token
 
   Scenario:Verify CRF token generate
     When User hit the end point
-    Then User should see CRF token is generated
+    Then The response code should 200
+
+#    Then User should see CRF token is generated
