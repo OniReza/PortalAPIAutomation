@@ -40,7 +40,6 @@ public class LoginStep {
         Response rs= request.body(Appis).post(ENDPOINT);
         Assert.assertEquals(401,rs.getStatusCode());
 
-
         System.out.println(rs.getStatusCode());
 
     }

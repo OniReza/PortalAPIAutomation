@@ -10,7 +10,6 @@ public class Utils {
         config.setProperty("token", variable);
         config.save();
         return variable;
-
     }
 
 }
