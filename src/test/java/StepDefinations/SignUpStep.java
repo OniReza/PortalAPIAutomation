@@ -3,30 +3,18 @@ package StepDefinations;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import com.github.javafaker.App;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.http.Headers;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
-
-import java.io.IOException;
 import java.util.Properties;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
 public class SignUpStep {
-
-
 
     private static String bearerToken ;
     Properties prop=new Properties();
@@ -45,7 +33,7 @@ public class SignUpStep {
     @When("User hit the end point fo sign up")
     public void User_input_signup_information() throws Exception {
 
-        String origin="https://dev.plcumember.com";
+        String origin="https://dev.ardupaymembers.com";
 
         RestAssured.baseURI = "https://api.dev.auws.cloud";
         Response response = given().headers(
@@ -73,7 +61,7 @@ public class SignUpStep {
                         ContentType.JSON,
                         "Accept", ContentType.JSON)
                 .body("{\n" +
-                        "    \"email\":\"mikerr.aubitpay.dev.41@mailinator.com\",\n" +
+                        "    \"email\":\"makjons.aubitpay.dev.41@mailinator.com\",\n" +
                         "    \"password\": \"Tt123#123#\",\n" +
                         "    \"firstName\": \"Jane\",\n" +
                         "    \"lastName\": \"Rasmus\",\n" +
@@ -86,7 +74,7 @@ public class SignUpStep {
                         "    \"city\": \"somewhere \",\n" +
                         "    \"postCode\": \"1516\",\n" +
                         "    \"doNotEmail\": true,\n" +
-                        "    \"mobileNumber\": \"+4479405089380\",\n" +
+                        "    \"mobileNumber\": \"+4479405089578\",\n" +
                         "    \"preferredDisplayLanguage\": \"en\",\n" +
                         "    \"isTermsAgreed\": true\n" +
                         "}")
