@@ -7,6 +7,7 @@ import com.github.javafaker.App;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -44,8 +45,11 @@ public class SignUpStep {
     @When("User hit the end point fo sign up")
     public void User_input_signup_information() throws Exception {
 
+        String origin="https://dev.plcumember.com";
+
         RestAssured.baseURI = "https://api.dev.auws.cloud";
         Response response = given().headers(
+                         "origin" , origin,
                         "Content-Type",
                         ContentType.JSON,
                         "Accept",
@@ -55,8 +59,6 @@ public class SignUpStep {
                 .then().assertThat().statusCode(200).body("status", equalTo("success"))
                 .extract().response();
          bearerToken = response.getBody().path("data.csrfToken.token");
-
-
 
     }
 
@@ -71,7 +73,7 @@ public class SignUpStep {
                         ContentType.JSON,
                         "Accept", ContentType.JSON)
                 .body("{\n" +
-                        "    \"email\":\"karlos.aubitpay.dev.41@mailinator.com\",\n" +
+                        "    \"email\":\"mikerr.aubitpay.dev.41@mailinator.com\",\n" +
                         "    \"password\": \"Tt123#123#\",\n" +
                         "    \"firstName\": \"Jane\",\n" +
                         "    \"lastName\": \"Rasmus\",\n" +
@@ -84,7 +86,7 @@ public class SignUpStep {
                         "    \"city\": \"somewhere \",\n" +
                         "    \"postCode\": \"1516\",\n" +
                         "    \"doNotEmail\": true,\n" +
-                        "    \"mobileNumber\": \"+4479405089359\",\n" +
+                        "    \"mobileNumber\": \"+4479405089380\",\n" +
                         "    \"preferredDisplayLanguage\": \"en\",\n" +
                         "    \"isTermsAgreed\": true\n" +
                         "}")
