@@ -36,7 +36,6 @@ public class CsrfTokenStep {
         }
     }
 
-
    private static String token ;
    private static String jsonString;
 
@@ -68,8 +67,6 @@ public class CsrfTokenStep {
         jsonString = response.asString();
         token = JsonPath.from(jsonString).get().toString();
         System.out.println(token);
-
-
     }
 
     @Then("The response code should {int}")

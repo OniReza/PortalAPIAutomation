@@ -11,5 +11,4 @@ public class Utils {
         config.save();
         return variable;
     }
-
 }

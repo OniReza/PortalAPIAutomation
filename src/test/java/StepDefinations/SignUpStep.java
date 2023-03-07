@@ -2,10 +2,10 @@ package StepDefinations;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.internal.RestAssuredResponseImpl;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
@@ -13,12 +13,10 @@ import java.util.Properties;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-
 public class SignUpStep {
-
     private static String bearerToken ;
     Properties prop=new Properties();
-
+    Response response=new RestAssuredResponseImpl();
     FileInputStream file;
     {
         try {
@@ -29,43 +27,40 @@ public class SignUpStep {
     }
 
     RequestSpecification request;
-
     @When("User hit the end point fo sign up")
-    public void User_input_signup_information() throws Exception {
+    public void User_input_signup_information()throws Exception{
+        prop.load(file);
+        RestAssured.baseURI  = prop.getProperty("baseUrl");
+        String origin=prop.getProperty("origin");
+        String public_csrf=prop.getProperty("CRFTokenEndPoint");
 
-        String origin="https://dev.ardupaymembers.com";
-
-        RestAssured.baseURI = "https://api.dev.auws.cloud";
-        Response response = given().headers(
-                         "origin" , origin,
+    response = given().headers(
+                        "origin" , origin,
                         "Content-Type",
                         ContentType.JSON,
                         "Accept",
                         ContentType.JSON
                 )
-                .when().get("/v2/auth/csrf")
+                .when().get(public_csrf)
                 .then().assertThat().statusCode(200).body("status", equalTo("success"))
                 .extract().response();
          bearerToken = response.getBody().path("data.csrfToken.token");
 
-    }
+        String SignupEndPoint=prop.getProperty("SignUpEndPoint");
 
-    @Then("User should see status code 200")
-    public void User_input_signup_information_Test(){
+         response= given().headers(
 
-        RestAssured.baseURI = "https://api.dev.auws.cloud/";
-        Response response3 = given().headers(
                         "Authorization",
                         "Bearer " + bearerToken,
                         "Content-Type",
                         ContentType.JSON,
                         "Accept", ContentType.JSON)
                 .body("{\n" +
-                        "    \"email\":\"makjons.aubitpay.dev.41@mailinator.com\",\n" +
+                        "    \"email\":\"markpiter.hodl.tst.41@mailinator.com\",\n" +
                         "    \"password\": \"Tt123#123#\",\n" +
-                        "    \"firstName\": \"Jane\",\n" +
-                        "    \"lastName\": \"Rasmus\",\n" +
-                        "    \"latinFirstName\": \"Janek\",\n" +
+                        "    \"firstName\": \"Mack\",\n" +
+                        "    \"lastName\": \"Markas\",\n" +
+                        "    \"latinFirstName\": \"Kanek\",\n" +
                         "    \"latinLastName\": \"Rasmuss\",\n" +
                         "    \"countryCode\": \"GB\",\n" +
                         "    \"dateOfBirth\": \"1990-11-24\",\n" +
@@ -74,14 +69,19 @@ public class SignUpStep {
                         "    \"city\": \"somewhere \",\n" +
                         "    \"postCode\": \"1516\",\n" +
                         "    \"doNotEmail\": true,\n" +
-                        "    \"mobileNumber\": \"+4479405089578\",\n" +
+                        "    \"mobileNumber\": \"+4479405086866\",\n" +
                         "    \"preferredDisplayLanguage\": \"en\",\n" +
                         "    \"isTermsAgreed\": true\n" +
                         "}")
-                .when().post("v2/auth/onboarding/signup")
-                .then().extract().response();
 
-        Assert.assertEquals(200,response3.getStatusCode());
+                .when().post(SignupEndPoint)
+                .then().extract().response();
+        Assert.assertEquals(200,response.getStatusCode());
+    }
+
+    @Then("User should see portal sign up complete")
+    public void User_input_signup_information_Test(){
+        Assert.assertEquals(200,response.getStatusCode());
     }
 }
 
