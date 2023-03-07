@@ -47,9 +47,9 @@ public class PartnerSignUp {
                         ContentType.JSON,
                         "Accept", ContentType.JSON)
                 .body("{\n" +
-                        "\t\"email\": \"saimond.icc.tst.9@sharklasers.com\",\n" +
+                        "\t\"email\": \"sami.icc.tst.9@sharklasers.com\",\n" +
                         "\t\"password\": \"Tt123#123\",\n" +
-                        "    \"brand\" : \"INFINITYCLUBCARDSUS\",\n" +
+                        "    \"brand\" : \"Seacret\",\n" +
                         "    \"preferredCardCurrency\": \"USD\",\n" +
                         "    \"title\": \"\",\n" +
                         "    \"firstName\": \"samual\",\n" +
@@ -57,7 +57,7 @@ public class PartnerSignUp {
                         "    \"latinFirstName\": \"jems\",\n" +
                         "    \"latinLastName\": \"romi\",\n" +
                         "    \"dateOfBirth\": \"1995-01-01\",\n" +
-                        "    \"phone\": \"+8801745254833\",\n" +
+                        "    \"phone\": \"+8801745254822\",\n" +
                         "    \"province\": \"\",\n" +
                         "    \"postCode\": \"55555\",\n" +
                         "    \"countryCode\": \"US\",\n" +
