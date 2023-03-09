@@ -2,6 +2,7 @@ package StepDefinations;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import Utility.SignupBody;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -17,6 +18,7 @@ public class SignUpStep {
     private static String bearerToken ;
     Properties prop=new Properties();
     Response response=new RestAssuredResponseImpl();
+    SignupBody.PortalSignup portal = new SignupBody.PortalSignup();
     FileInputStream file;
     {
         try {
@@ -26,7 +28,7 @@ public class SignUpStep {
         }
     }
 
-    RequestSpecification request;
+
     @When("User hit the end point fo sign up")
     public void User_input_signup_information()throws Exception{
         prop.load(file);
@@ -55,25 +57,7 @@ public class SignUpStep {
                         "Content-Type",
                         ContentType.JSON,
                         "Accept", ContentType.JSON)
-                .body("{\n" +
-                        "    \"email\":\"markpiter.hodl.tst.41@mailinator.com\",\n" +
-                        "    \"password\": \"Tt123#123#\",\n" +
-                        "    \"firstName\": \"Mack\",\n" +
-                        "    \"lastName\": \"Markas\",\n" +
-                        "    \"latinFirstName\": \"Kanek\",\n" +
-                        "    \"latinLastName\": \"Rasmuss\",\n" +
-                        "    \"countryCode\": \"GB\",\n" +
-                        "    \"dateOfBirth\": \"1990-11-24\",\n" +
-                        "    \"addressLine1\": \"someplace\",\n" +
-                        "    \"addressLine2\": \"\",\n" +
-                        "    \"city\": \"somewhere \",\n" +
-                        "    \"postCode\": \"1516\",\n" +
-                        "    \"doNotEmail\": true,\n" +
-                        "    \"mobileNumber\": \"+4479405086866\",\n" +
-                        "    \"preferredDisplayLanguage\": \"en\",\n" +
-                        "    \"isTermsAgreed\": true\n" +
-                        "}")
-
+                 .body(portal.portal_body())
                 .when().post(SignupEndPoint)
                 .then().extract().response();
         Assert.assertEquals(200,response.getStatusCode());
