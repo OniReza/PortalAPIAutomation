@@ -16,7 +16,6 @@ import static io.restassured.RestAssured.given;
 
 
 public class PartnerSignUp {
-
     Response response=new RestAssuredResponseImpl();
 
     private Scenario scenario;

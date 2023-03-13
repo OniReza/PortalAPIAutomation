@@ -2,30 +2,25 @@ package Utility;
 
 public class SignupBody {
 
-
-    SignupBody.PortalSignup portal = new SignupBody.PortalSignup();
-
-    Random_data random_data=new Random_data();
-
     public static class PortalSignup {
 
         public String portal_body() {
 
             String portalBody = "{\n" +
-                    "    \"email\":\"jon2.hodl.tst.41@mailinator.com\",\n" +
+                    "    \"email\":\"rayan.hodl.tst.41@mailinator.com\",\n" +
                     "    \"password\": \"Tt123#123#\",\n" +
-                    "    \"firstName\": \"Zonson\",\n" +
+                    "    \"firstName\": \"Rayan\",\n" +
                     "    \"lastName\": \"Rike\",\n" +
-                    "    \"latinFirstName\": \"Kanek\",\n" +
-                    "    \"latinLastName\": \"Rike\",\n" +
+                    "    \"latinFirstName\": \"jackson\",\n" +
+                    "    \"latinLastName\": \"Riken\",\n" +
                     "    \"countryCode\": \"GB\",\n" +
-                    "    \"dateOfBirth\": \"1990-11-24\",\n" +
+                    "    \"dateOfBirth\": \"1981-11-24\",\n" +
                     "    \"addressLine1\": \"someplace\",\n" +
                     "    \"addressLine2\": \"\",\n" +
                     "    \"city\": \"somewhere \",\n" +
                     "    \"postCode\": \"1516\",\n" +
                     "    \"doNotEmail\": true,\n" +
-                    "    \"mobileNumber\": \"+4479405018567\",\n" +
+                    "    \"mobileNumber\": \"+4479405017412\",\n" +
                     "    \"preferredDisplayLanguage\": \"en\",\n" +
                     "    \"isTermsAgreed\": true\n" +
                     "}";

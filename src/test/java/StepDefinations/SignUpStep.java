@@ -3,6 +3,9 @@ package StepDefinations;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import Utility.SignupBody;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -17,8 +20,16 @@ import static org.hamcrest.Matchers.equalTo;
 public class SignUpStep {
     private static String bearerToken ;
     Properties prop=new Properties();
+
+    private Scenario scenario;
+    public static String Data2;
     Response response=new RestAssuredResponseImpl();
     SignupBody.PortalSignup portal = new SignupBody.PortalSignup();
+
+    @Before
+    public void before(Scenario scenario) {
+        this.scenario = scenario;
+    }
     FileInputStream file;
     {
         try {
@@ -66,6 +77,19 @@ public class SignUpStep {
     @Then("User should see portal sign up complete")
     public void User_input_signup_information_Test(){
         Assert.assertEquals(200,response.getStatusCode());
+        Data2 =response.getBody().prettyPrint();
+
+        System.out.println(Data2);
+
+        writeInReport();
+
+    }
+
+    public void writeInReport()
+    {
+        String consoleOutput = Data2;
+        System.out.println(consoleOutput);
+        scenario.log(consoleOutput);
     }
 }
 
