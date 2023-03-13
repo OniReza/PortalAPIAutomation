@@ -78,9 +78,7 @@ public class SignUpStep {
     public void User_input_signup_information_Test(){
         Assert.assertEquals(200,response.getStatusCode());
         Data2 =response.getBody().prettyPrint();
-
         System.out.println(Data2);
-
         writeInReport();
 
     }
