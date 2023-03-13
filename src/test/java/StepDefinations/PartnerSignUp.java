@@ -3,6 +3,8 @@ package StepDefinations;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import Utility.SignupBody;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -16,8 +18,17 @@ import static io.restassured.RestAssured.given;
 public class PartnerSignUp {
 
     Response response=new RestAssuredResponseImpl();
+
+    private Scenario scenario;
+    public static String Data2;
     SignupBody.PortalSignup partner = new SignupBody.PortalSignup();
     Properties prop=new Properties();
+
+    @Before
+    public void before(Scenario scenario) {
+        this.scenario = scenario;
+    }
+
     FileInputStream file;
     {
         try {
@@ -52,5 +63,19 @@ public class PartnerSignUp {
      @Then("User should see partner sign up complete")
     public void User_input_signup_information(){
          Assert.assertEquals(200,response.getStatusCode());
+
+         Data2 =response.getBody().prettyPrint();
+
+         System.out.println(Data2);
+
+         writeInReport();
     }
+
+    public void writeInReport()
+    {
+        String consoleOutput = Data2;
+        System.out.println(consoleOutput);
+        scenario.log(consoleOutput);
+    }
+
 }

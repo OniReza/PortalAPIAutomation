@@ -35,17 +35,17 @@ public class SignupBody {
         public String partner_body() {
 
             String partnerBody = "{\n" +
-                    "\t\"email\": \"mails.icd.tst.9@sharklasers.com\",\n" +
+                    "\t\"email\": \"russel.icd.tst.9@sharklasers.com\",\n" +
                     "\t\"password\": \"Tt123#123\",\n" +
                     "    \"brand\" : \"Seacret\",\n" +
                     "    \"preferredCardCurrency\": \"USD\",\n" +
                     "    \"title\": \"\",\n" +
-                    "    \"firstName\": \"Mils\",\n" +
-                    "    \"lastName\": \"Marshal\",\n" +
-                    "    \"latinFirstName\": \"jems\",\n" +
-                    "    \"latinLastName\": \"romi\",\n" +
-                    "    \"dateOfBirth\": \"1995-01-01\",\n" +
-                    "    \"phone\": \"+8801745250000\",\n" +
+                    "    \"firstName\": \"Russel\",\n" +
+                    "    \"lastName\": \"Arnold\",\n" +
+                    "    \"latinFirstName\": \"russel\",\n" +
+                    "    \"latinLastName\": \"arnold\",\n" +
+                    "    \"dateOfBirth\": \"1981-01-01\",\n" +
+                    "    \"phone\": \"+8801745254698\",\n" +
                     "    \"province\": \"\",\n" +
                     "    \"postCode\": \"55555\",\n" +
                     "    \"countryCode\": \"US\",\n" +
