@@ -212,6 +212,13 @@ public class Portals {
             return url;
         }
 
+        public String wallmoneymembers() {
+            String url = "https://sandbox.wallmoneymembers.com/";
+            return url;
+        }
+
+
+
         public String gsl() {
             String url = "tst.gslifestylecard.com";
             return url;
