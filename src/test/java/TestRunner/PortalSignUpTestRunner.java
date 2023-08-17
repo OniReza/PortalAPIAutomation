@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/Features/SignUp/PortalSignUp.feature",glue = {"StepDefinations"},
         monochrome = true,
-        plugin ={"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"})
+        plugin ={"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"} )
 
-public class PortalSignUpTestRunner {
+public class PortalSignUpTestRunner{
 }
