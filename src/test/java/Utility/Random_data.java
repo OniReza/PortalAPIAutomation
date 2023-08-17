@@ -30,7 +30,7 @@ public class Random_data {
         Portals.dev dev = new Portals.dev();
         Portals.tst tst = new Portals.tst();
 
-        String PortalEmail= tst.clubswan();
+        String PortalEmail= dev.clubswan();
 
         int start = PortalEmail.indexOf('.');
         int end = PortalEmail.lastIndexOf('.');
